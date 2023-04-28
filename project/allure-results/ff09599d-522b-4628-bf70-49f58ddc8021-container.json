@@ -1,0 +1,1 @@
+{"uuid":"ff09599d-522b-4628-bf70-49f58ddc8021","name":"LoginScenario.start","children":["caad8e73-d8cf-4aad-a594-7c82197f6c4d"],"description":"","befores":[{"name":"start","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1682276124324,"stop":1682276130352}],"afters":[],"start":1682276124309,"stop":1682276130353}
