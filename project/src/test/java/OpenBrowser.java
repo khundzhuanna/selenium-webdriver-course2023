@@ -18,6 +18,7 @@ public class OpenBrowser {
     public void OpenBrowser() {
         driver.get("https://ya.ru/");
         driver.findElement(By.className("alice-fab")).click();
+
     }
 
     @AfterMethod
