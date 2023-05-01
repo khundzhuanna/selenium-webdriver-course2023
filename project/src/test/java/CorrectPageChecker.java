@@ -1,5 +1,10 @@
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.Color;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,14 +28,6 @@ public class CorrectPageChecker {
     }
     private WebDriver driver;
 
-    @BeforeMethod
-    public void start() {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/ruaaaye/Tools/chromedriver.exe");
-        driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        login();
-    }
-
     public void login() {
         driver.navigate().to("http://localhost/litecart/admin/login.php");
         driver.findElement(By.name("username")).sendKeys("admin");
@@ -39,7 +36,28 @@ public class CorrectPageChecker {
     }
 
     @Test
+    public void testCorrectChecking() {
+        // chrome
+        System.setProperty("webdriver.chrome.driver", "C:/Users/ruaaaye/Tools/chromedriver.exe");
+        driver = new ChromeDriver();
+        correctChecking();
+        stop();
+//
+//        // IE
+//        System.setProperty("webdriver.ie.driver", "C:/Users/ruaaaye/Tools/IEDriverServer.exe");
+//        driver = new InternetExplorerDriver();
+//        correctChecking();
+//        stop();
+//
+//        // firefox
+//        System.setProperty("webdriver.gecko.driver", "C:/Users/ruaaaye/Tools/geckodriver.exe");
+//        driver = new FirefoxDriver();
+//        correctChecking();
+//        stop();
+    }
+
     public void correctChecking() {
+        login();
         driver.navigate().to("http://localhost/litecart/en/");
 
         WebElement mainPageElement = driver.findElement(By.xpath("//div[@id='box-campaigns']/div/ul/li"));
