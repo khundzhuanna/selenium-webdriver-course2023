@@ -75,8 +75,9 @@ public class CountrySorting {
         List<String> unsortedList = new ArrayList<>();
         List<String> sortedList = new ArrayList<>();
         for (int j = 0; j < arr.size(); j++) {
-            unsortedList.add(arr.get(j).getText());
-            sortedList.add(arr.get(j).getText());
+            String itemText = arr.get(j).getText();
+            unsortedList.add(itemText);
+            sortedList.add(itemText);
         }
         Collections.sort(sortedList);
         for (int i = 0; i < sortedList.size(); i++) {

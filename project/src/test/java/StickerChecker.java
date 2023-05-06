@@ -29,20 +29,16 @@ public class StickerChecker {
         driver.findElement(By.name("login")).click();
         driver.navigate().to("http://localhost/litecart/en/");
 
-        List<WebElement> elements = driver.findElements(By.xpath("//li[@class='product column shadow hover-light']"));
-        for (int j = 0; j < elements.size(); j++) {
-            WebElement ducky = elements.get(j); // - достаём уточку
-            List<WebElement> stickerDuckyNew = ducky.findElements(By.xpath(".//div[@class='sticker new']"));
-            List<WebElement> stickerDuckySale = ducky.findElements(By.xpath(".//div[@class='sticker sale']"));
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='content']/ul/li"));
+        List<WebElement> duckies = elements.subList(1, elements.size());
+        for (int j = 0; j < duckies.size(); j++) {
+            WebElement ducky = duckies.get(j); // - достаём уточку
+            List<WebElement> stickerDucky = ducky.findElements(By.xpath(".//div[contains(@class, 'sticker')]"));
 
-            if (stickerDuckyNew.size() == 0 && stickerDuckySale.size() == 0) {
+            if (stickerDucky.size() == 0) {
                 throw new NoSuchElementException();
-            } else if (stickerDuckyNew.size() > 1 && stickerDuckySale.size() == 0) {
-                throw new RuntimeException("More than one 'New' sticker!");
-            } else if (stickerDuckyNew.size() == 0 && stickerDuckySale.size() > 1) {
-                throw new RuntimeException("More than one 'Sale' sticker!");
-            } else if (stickerDuckyNew.size() >= 1 && stickerDuckySale.size() >= 1) {
-                throw new RuntimeException("Both 'Sale' and 'New' stickers added!");
+            } else if (stickerDucky.size() > 1) {
+                throw new RuntimeException("More than one sticker!");
             }
         }
     }

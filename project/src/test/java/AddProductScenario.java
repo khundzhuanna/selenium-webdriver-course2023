@@ -32,6 +32,13 @@ public class AddProductScenario {
     @Test
     public void addingProduct() {
         login();
+
+        driver.navigate().to("http://localhost/litecart/admin/?app=catalog&doc=catalog");
+        WebElement productCountElement = driver.findElement(By.xpath("//tr[@class='footer']/td"));
+        String productCountRaw = productCountElement.getText();
+        Integer initProductCount = Character.getNumericValue(productCountRaw.charAt(productCountRaw.length() - 1));
+
+        driver.navigate().to("http://localhost/litecart/admin/");
         driver.findElement(By.xpath("//span[text()='Catalog']")).click();
         driver.findElement(By.xpath("//a[@href='http://localhost/litecart/admin/?category_id=0&app=catalog&doc=edit_product']")).click();
         driver.findElement(By.xpath("//input[@type='radio'][@value='1']")).click(); //status
@@ -75,6 +82,13 @@ public class AddProductScenario {
         driver.findElement(By.xpath("//input[@name='gross_prices[USD]']")).clear();
         driver.findElement(By.xpath("//input[@name='gross_prices[USD]']")).sendKeys("21");
         driver.findElement(By.xpath("//button[@name='save']")).click();
+
+        driver.navigate().to("http://localhost/litecart/admin/?app=catalog&doc=catalog");
+        productCountElement = driver.findElement(By.xpath("//tr[@class='footer']/td"));
+        productCountRaw = productCountElement.getText();
+        Integer afterProductCount = Character.getNumericValue(productCountRaw.charAt(productCountRaw.length() - 1));
+
+        assert afterProductCount - initProductCount == 1;
     }
 
     @AfterMethod

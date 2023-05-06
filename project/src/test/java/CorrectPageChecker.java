@@ -41,7 +41,7 @@ public class CorrectPageChecker {
         System.setProperty("webdriver.chrome.driver", "C:/Users/ruaaaye/Tools/chromedriver.exe");
         driver = new ChromeDriver();
         correctChecking();
-        stop();
+//        stop();
 //
 //        // IE
 //        System.setProperty("webdriver.ie.driver", "C:/Users/ruaaaye/Tools/IEDriverServer.exe");
@@ -111,7 +111,11 @@ public class CorrectPageChecker {
         item.normalPrice = Integer.parseInt(normalPriceElement.getText().substring(1));
         item.discountPrice = Integer.parseInt(discountPriceElement.getText().substring(1));
         item.isNormalPriceDashed = normalPriceElement.getTagName().equals("s");
-        item.isNormalPriceGray = normalizedNormalPriceElementColor.codePoints().distinct().count() == 1;
+        item.isNormalPriceGray = normalizedNormalPriceElementColor
+                .substring(0, 2).equals(normalizedNormalPriceElementColor.substring(2, 4))
+                &&
+                normalizedNormalPriceElementColor
+                        .substring(0, 2).equals(normalizedNormalPriceElementColor.substring(4, 6));
         item.isDiscountPriceBold = discountPriceElement.getTagName().equals("strong");
         item.isDiscountPriceRed = normalizedDiscountPriceElementColor.substring(2, 4).equals("00")
                 &&

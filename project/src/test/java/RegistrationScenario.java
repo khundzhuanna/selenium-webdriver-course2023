@@ -7,7 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.UUID;
 
 public class RegistrationScenario {
     private WebDriver driver;
@@ -34,15 +37,17 @@ public class RegistrationScenario {
         driver.findElement(By.name("city")).sendKeys("White City");
         driver.findElement(By.xpath("//span[@class='select2-selection__rendered']")).click();
         driver.findElement(By.xpath("//input[@class='select2-search__field']")).sendKeys("United States" + Keys.ENTER);
-        driver.findElement(By.name("email")).sendKeys("username30042023@mail.us");
-        driver.findElement(By.name("phone")).sendKeys("+79998887766");
+        String randomEmail = UUID.randomUUID().toString().substring(0, 10);
+        driver.findElement(By.name("email")).sendKeys(randomEmail + "@mail.us");
+        String randomPhone = String.valueOf(Math.random()).substring(2, 12);
+        driver.findElement(By.name("phone")).sendKeys("+" + randomPhone);
         driver.findElement(By.name("password")).sendKeys("who_askeD4");
         driver.findElement(By.name("confirmed_password")).sendKeys("who_askeD4");
         driver.findElement(By.name("create_account")).click();
 
         driver.findElement(By.xpath("//div/ul[@class='list-vertical']/li/a[@href='http://localhost/litecart/en/logout']")).click();
 
-        driver.findElement(By.name("email")).sendKeys("username30042023@mail.us");
+        driver.findElement(By.name("email")).sendKeys(randomEmail + "@mail.us");
         driver.findElement(By.name("password")).sendKeys("who_askeD4");
 
         driver.findElement(By.xpath("//button[@name='login']")).click();
