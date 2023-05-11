@@ -29,8 +29,7 @@ public class StickerChecker {
         driver.findElement(By.name("login")).click();
         driver.navigate().to("http://localhost/litecart/en/");
 
-        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='content']/ul/li"));
-        List<WebElement> duckies = elements.subList(1, elements.size());
+        List<WebElement> duckies = driver.findElements(By.xpath("//li[contains(@class, 'product')]"));
         for (int j = 0; j < duckies.size(); j++) {
             WebElement ducky = duckies.get(j); // - достаём уточку
             List<WebElement> stickerDucky = ducky.findElements(By.xpath(".//div[contains(@class, 'sticker')]"));
